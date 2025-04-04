@@ -15,7 +15,10 @@ Este es un proyecto basado en Flask que permite analizar archivos CSV subidos po
 
 📸 Capturas de Pantalla
 
-Aquí puedes agregar imágenes de la aplicación en funcionamiento.
+![image](https://github.com/user-attachments/assets/a6860546-c2cf-4c77-ae30-57bcd2df291f)
+![image](https://github.com/user-attachments/assets/c24bad17-c81d-43c0-bd36-77f1f99960ea)
+![image](https://github.com/user-attachments/assets/6dbda5de-aa9d-42ea-9d15-528ee911b6c6)
+
 
 🛠️ Tecnologías Utilizadas
 
@@ -40,8 +43,8 @@ Despliegue: Render
 🛠️ Instalación y Ejecución Local
 
 Clonar el repositorio:
-git clone https://github.com/tu-usuario/tu-repositorio.git
-cd tu-repositorio/Backend
+git clone https://github.com/FranciscoJALG/Data-analizer.git
+cd Data-analizer/Backend
 
 Crear un entorno virtual (opcional pero recomendado):
 python -m venv venv

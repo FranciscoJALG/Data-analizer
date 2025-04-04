@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analizador de Datos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="container mt-5">
+
+    <h2 class="text-center">📊 Analizador de Datos CSV</h2>
+
+    <div class="card p-3">
+        <input type="file" class="form-control" id="fileInput">
+        <button class="btn btn-primary mt-2" onclick="uploadFile()">Subir y Analizar</button>
+    </div>
+
+    <div id="output" class="mt-3"></div>
+
+    <h3 class="mt-4">📂 Historial de Archivos</h3>
+    <ul id="fileHistory" class="list-group"></ul>
+
+    <script>
+        function uploadFile() {
+            let fileInput = document.getElementById("fileInput").files[0];
+            let formData = new FormData();
+            formData.append("file", fileInput);
+
+            fetch("/uploads", { method: "POST", body: formData })
+                .then(response => response.json())
+                .then(data => {
+                    let outputDiv = document.getElementById("output");
+                    outputDiv.innerHTML = "<h4>📊 Análisis del Archivo</h4>";
+                    outputDiv.innerHTML += `<pre>${JSON.stringify(data, null, 2)}</pre>`;
+                    
+                    if (data.graph_url) {
+                        outputDiv.innerHTML += `<h5>📈 Gráfico Generado</h5>`;
+                        outputDiv.innerHTML += `<img src="${data.graph_url}" class="img-fluid"/>`;
+                    }
+
+                    addToHistory(fileInput.name, data);
+                })
+                .catch(error => console.error("Error:", error));
+        }
+
+        function addToHistory(filename, data) {
+            let fileHistory = document.getElementById("fileHistory");
+            let listItem = document.createElement("li");
+            listItem.className = "list-group-item";
+            listItem.innerHTML = `<strong>${filename}</strong> - ${JSON.stringify(data)}`;
+            fileHistory.appendChild(listItem);
+        }
+    </script>
+
+</body>
+</html>
